@@ -1,0 +1,297 @@
+Node prev=null;
+        Node next=null;
+        Node curr=head;
+        while(curr!=null)
+        {
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+
+Node fast=head;
+    	Node slow=head;
+    	for(int i=0; i<n; i++)
+    	{
+    	    if(fast==null)
+    	    return -1;
+    	    
+    	    fast=fast.next;
+    	}
+    	
+    	while(fast!=null)
+    	{
+    	    slow=slow.next;
+    	    fast=fast.next;
+    	}
+    	return slow.data;
+
+Node *a = head, *b, *c;
+        Node *prev = NULL;
+        
+        while( a && a->next )
+        {
+            b = a->next;     // b is second node
+            c = b->next;     // c is third node (c might be null)
+                             // current order : prev - a - b - c
+            
+            if(a == head)
+                // b will be new head
+                head = b;
+            else
+                // else, linking second node i.e. b, to a's ancestor
+                prev->next = b;
+            
+            b->next = a;     // a should now come after b
+            a->next = c;     // connecting a to list ahead
+            
+            // now we have to update a and prev for next pair
+            prev = a;
+            a = c;
+        }
+        
+        return head;
+
+Node temp=head;
+         int len=0;
+         while(temp!=null)
+         {
+             len++;
+             temp=temp.next;
+         }
+         
+         temp=head;
+         for(int i=0; i<(len/2); i++)
+         {
+             temp=temp.next;
+         }
+         return temp.data;
+
+Node temp1=head1;
+         Node temp2=head2;
+         int c1=0,c2=0;
+         while(temp1!=null)
+         {
+             c1++;
+             temp1=temp1.next;
+         }
+         while(temp2!=null)
+         {
+             c2++;
+             temp2=temp2.next;
+         }
+         temp1=head1;
+         temp2=head2;
+         int a=Math.abs(c1-c2);
+         if(c1>c2)
+         {
+             for(int i=0; i<a; i++)
+             {
+                 temp1=temp1.next;
+             }
+         }
+         else
+         {
+            for(int i=0; i<a; i++)
+            {
+                 temp2=temp2.next;
+            }
+         }
+         
+         while(temp1!=null && temp2!=null)
+         {
+             if(temp1==temp2)
+             return temp1.data;
+             
+             
+             temp1=temp1.next;
+             temp2=temp2.next;
+         }
+         
+         return -1;
+
+if(x.length()%2!=0)
+        return false;
+        
+        int len=x.length();
+        Stack<Character> s=new Stack();
+        
+        for(int i=0; i<len; i++)
+        {
+           char c=x.charAt(i);
+            if(c=='(' || c=='{' || c=='[')
+            {
+                s.push(c);
+            }
+            else
+            {
+                if(s.isEmpty()) return false;
+                
+                if(ispair(s.peek(),c))
+                s.pop();
+                
+                else
+                return false;
+            }
+        }
+        if(s.isEmpty())
+        return true;
+        else
+        return false;
+
+Stack<Long> s = new Stack<>();              
+        long nge[] = new long[n]; 
+        for (int i = n - 1; i >= 0; i--)
+        {     
+            if (!s.empty()) 
+            {              
+                while (!s.empty() && s.peek() < arr[i]) {
+                    s.pop();                              
+                } 
+            } 
+            nge[i] = s.empty() ? -1 : s.peek();  
+            s.push(arr[i]);                     
+        } 
+        return nge;
+
+// Your code here
+        int S[] = new int[n];
+        Stack<Integer> st=new Stack<>();
+        st.push(0);
+         S[0]=1;
+        
+        for(int i=1;i<n;i++) 
+        { 
+            while(!st.isEmpty() && price[i]>=price[st.peek()])
+            {
+                st.pop();
+            }
+            
+            S[i]=st.isEmpty()?i+1:i-st.peek();
+            
+            st.push(i);
+            
+        }
+        return S;
+
+Stack<Integer> stack=new Stack();
+      Queue<Integer>queue=new LinkedList();
+      
+      for(int i=0; i<k; i++)
+      {
+          stack.push(q.poll());
+      }
+     
+      while(!stack.isEmpty())
+      {
+          queue.add(stack.pop());
+      }
+      
+      queue.addAll(q);
+      return queue;
+
+static int height(Node node)
+    {
+        if (node == null)
+            return 0;
+        else {
+  
+            int lheight = height(node.left);
+            int rheight = height(node.right);
+  
+            if (lheight > rheight)
+                return (lheight + 1);
+            else
+                return (rheight + 1);
+        }
+    }
+    static void printGivenLevel(Node node, int level, boolean ltr,ArrayList<Integer>ar)
+    {
+        if (node == null)
+            return;
+        if (level == 1)
+            ar.add(node.data);
+        else if (level > 1) {
+            if (ltr != false) {
+                printGivenLevel(node.left, level - 1, ltr,ar);
+                printGivenLevel(node.right, level - 1, ltr,ar);
+            }
+            else {
+                printGivenLevel(node.right, level - 1, ltr,ar);
+                printGivenLevel(node.left, level - 1, ltr,ar);
+            }
+        }
+    }
+    ArrayList<Integer> findSpiral(Node node) 
+    {
+        // Your code here
+        ArrayList<Integer> ar=new ArrayList();
+         int h = height(node);
+         int i;
+          boolean ltr = false;
+        for (i = 1; i <= h; i++){
+            printGivenLevel(node, i, ltr,ar);
+            
+            
+            ltr = !ltr;
+        }
+        return ar;
+
+if(head==null)return 0;
+        
+        return head.data+sumBT(head.left)+sumBT(head.right);
+
+if(root==null)
+        return false;
+        
+        if(root.left==null && root.right==null &&S-root.data==0)
+        return true;
+        
+        return hasPathSum(root.left,S-root.data)||hasPathSum(root.right,S-root.data);
+
+int len =0;
+public void ArrayToBst(int[] nums, int low, int high, int []res)
+   {
+       if(low>high)
+       return;
+       
+       int mid=(low+high)/2;
+       res[len++]=nums[mid];
+       
+       ArrayToBst(nums,low,mid-1,res);
+       ArrayToBst(nums,mid+1,high,res);
+   }
+    public int[] sortedArrayToBST(int[] nums)
+    {
+        int res[]=new int[nums.length];
+        
+        ArrayToBst(nums,0,nums.length-1,res);
+        return res;
+    }
+
+public int isPairPresent(Node root, int target)
+    {
+        if(root==null)return 0;
+        
+        HashSet<Integer> set = new HashSet<Integer>();
+
+        traverse(root,set);
+
+        for(int i : set){
+            int diff = target - i;
+        
+        if(set.contains(diff))
+            return 1;
+        }
+        return 0;
+    }
+    public void traverse(Node root,HashSet<Integer>set)
+    {
+        if(root==null)return;
+        
+        set.add(root.data);
+        traverse(root.left,set);
+        traverse(root.right,set);
+    }
+
